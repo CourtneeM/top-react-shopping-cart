@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../Styles/Home.css';
 
-function Home() {
+const Home = () => {
   return (
     <div className="Home">
-      <h1>Home</h1>
+      <h1>Nal Hutta Trading Post</h1>
+      <main>
+        <h3><Link to="/shop">Enter</Link></h3>
+      </main>
     </div>
   );
 }
