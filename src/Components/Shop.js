@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Shop = (props) => {
@@ -14,13 +14,13 @@ const Shop = (props) => {
     {id: 5, image: '#'}
   ];
 
-  // if item total is 0, remove that object from cart
+  // useEffect(() => {
+  //   console.log(cart);
+  // });
 
   const handleDecrementClick = (id, index) => {
     const decrementCartTotal = () => {
-      if (cartTotal === 0) {
-        return;
-      }
+      if (cartTotal === 0) return;
       setCartTotal((prevCartTotal) => prevCartTotal - 1);
     }
   
@@ -30,7 +30,10 @@ const Shop = (props) => {
         id,
         total: updatedCart[index].total - 1
       }
-  
+      if (updatedCart[index].total === 0) {
+        updatedCart.splice(index, 1);
+      }
+
       setCart(updatedCart);
     }
 
@@ -54,7 +57,7 @@ const Shop = (props) => {
       }
   
       setCart(updatedCart);
-      console.log(cart)
+      // console.log(cart)
     }
 
     incrementCartTotal();
@@ -75,7 +78,7 @@ const Shop = (props) => {
         >
           <i className="fas fa-shopping-bag fa-2x"></i>
         </Link>
-        <p style={{position: "absolute", bottom: "-25px", left: "30px"}}>{cartTotal}</p>
+        <p style={{position: "absolute", bottom: "-25px", left: "30px"}} className="cart-total" >{cartTotal}</p>
       </header>
       <main>
         <p>Inventory Varies Daily</p>
