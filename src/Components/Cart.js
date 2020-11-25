@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Cart = () => {
+const Cart = (props) => {
   return (
     <div>
       <heading>
         <h1>Nal Hutta Trading Post</h1>
       </heading>
       <main>
-        <Link to="/shop"><button>Back to Shop</button></Link>
+        <button onClick={() => props.history.goBack()}>Back to Shop</button>
+        {console.log(props.location.state)}
       </main>
     </div>
   )

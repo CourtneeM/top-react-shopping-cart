@@ -17,3 +17,5 @@ const Routes = () => {
 }
 
 export default Routes;
+
+// look at browser router history api - pushState, replaceState, popState

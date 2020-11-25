@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Shop = () => {
+const Shop = (props) => {
   const [cartTotal, setCartTotal] = useState(0);
+  
+  const [cart, setCart] = useState([]);
   
   const products = [
     {id: 1, image: '#'}, 
@@ -12,7 +14,6 @@ const Shop = () => {
     {id: 5, image: '#'}
   ];
 
-  const [cart, setCart] = useState([]);
 
   
   const decrementCartTotal = (id, index) => {
@@ -41,6 +42,7 @@ const Shop = () => {
       id,
       total: updatedCart[index].total + 1
     }
+
     setCart(updatedCart);
   }
 
@@ -48,7 +50,14 @@ const Shop = () => {
     <div className="shop">
       <header style={{position: "relative"}}>
         <h1>Nal Hutta Trading Post</h1>
-        <Link to="/cart">
+        <Link 
+          to={{
+            pathname: "/cart",
+            state: {
+              cart
+            }
+           }}
+        >
           <i className="fas fa-shopping-bag fa-2x"></i>
         </Link>
         <p style={{position: "absolute", bottom: "-25px", left: "30px"}}>{cartTotal}</p>
@@ -64,6 +73,7 @@ const Shop = () => {
               <i onClick={() => incrementCartTotal(id, index)} class="fas fa-plus"></i>
             </div>
           ))}
+          {console.log(props.history)}
         </div>
       </main>
     </div>
