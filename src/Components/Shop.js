@@ -15,44 +15,50 @@ const Shop = (props) => {
   ];
 
   // if item total is 0, remove that object from cart
-  
-  const decrementCartTotal = (id, index) => {
-    if (cartTotal === 0) {
-      return;
-    }
-    setCartTotal((prevCartTotal) => prevCartTotal - 1);
-
-    let updatedCart = [...cart];
-    updatedCart[index] = {
-      id,
-      total: updatedCart[index].total - 1
-    }
-
-    setCart(updatedCart);
-  }
-  
-  const incrementCartTotal = (id, index) => {
-    setCartTotal((prevCartTotal) => prevCartTotal + 1);
-    
-    let updatedCart = [...cart];
-    if (updatedCart[index] === undefined) {
-      updatedCart[index] = {total: 0}
-    }
-    updatedCart[index] = {
-      id,
-      total: updatedCart[index].total + 1
-    }
-
-    setCart(updatedCart);
-    console.log(cart)
-  }
 
   const handleDecrementClick = (id, index) => {
-    decrementCartTotal(id, index);
+    const decrementCartTotal = () => {
+      if (cartTotal === 0) {
+        return;
+      }
+      setCartTotal((prevCartTotal) => prevCartTotal - 1);
+    }
+  
+    const removeCartItem = (id, index) => {
+      let updatedCart = [...cart];
+      updatedCart[index] = {
+        id,
+        total: updatedCart[index].total - 1
+      }
+  
+      setCart(updatedCart);
+    }
+
+    decrementCartTotal();
+    removeCartItem(id, index);
   }
 
   const handleIncrementClick = (id, index) => {
-    incrementCartTotal(id, index);
+    const incrementCartTotal = () => {
+      setCartTotal((prevCartTotal) => prevCartTotal + 1);
+    }
+  
+    const addCartItem = (id, index) => {
+      let updatedCart = [...cart];
+      if (updatedCart[index] === undefined) {
+        updatedCart[index] = {total: 0}
+      }
+      updatedCart[index] = {
+        id,
+        total: updatedCart[index].total + 1
+      }
+  
+      setCart(updatedCart);
+      console.log(cart)
+    }
+
+    incrementCartTotal();
+    addCartItem(id, index);
   }
 
   return (
