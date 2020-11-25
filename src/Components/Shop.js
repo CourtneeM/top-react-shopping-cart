@@ -14,7 +14,7 @@ const Shop = (props) => {
     {id: 5, image: '#'}
   ];
 
-
+  // if item total is 0, remove that object from cart
   
   const decrementCartTotal = (id, index) => {
     if (cartTotal === 0) {
@@ -31,7 +31,7 @@ const Shop = (props) => {
     setCart(updatedCart);
   }
   
-  function incrementCartTotal(id, index) {
+  const incrementCartTotal = (id, index) => {
     setCartTotal((prevCartTotal) => prevCartTotal + 1);
     
     let updatedCart = [...cart];
@@ -44,6 +44,15 @@ const Shop = (props) => {
     }
 
     setCart(updatedCart);
+    console.log(cart)
+  }
+
+  const handleDecrementClick = (id, index) => {
+    decrementCartTotal(id, index);
+  }
+
+  const handleIncrementClick = (id, index) => {
+    incrementCartTotal(id, index);
   }
 
   return (
@@ -69,11 +78,10 @@ const Shop = (props) => {
             <div>
               {id}
               <br />
-              <i onClick={() => decrementCartTotal(id, index)} class="fas fa-minus"></i>
-              <i onClick={() => incrementCartTotal(id, index)} class="fas fa-plus"></i>
+              <i onClick={() => handleDecrementClick(id, index)} class="fas fa-minus"></i>
+              <i onClick={() => handleIncrementClick(id, index)} class="fas fa-plus"></i>
             </div>
           ))}
-          {console.log(props.history)}
         </div>
       </main>
     </div>
