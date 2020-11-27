@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Shop = (props) => {
   const [cartTotal, setCartTotal] = useState(0);
   
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([{id: '001', total: 3}, {id: '002', total: 5}]);
   
   const products = [
     {id: 1, image: '#'}, 
@@ -64,6 +64,13 @@ const Shop = (props) => {
     addCartItem(id, index);
   }
 
+  const updateCart = (newCart) => {
+    setCart(newCart);
+
+    // will need to update cartTotal - maybe map through cart and add up totals
+    setCartTotal();
+  }
+
   return (
     <div className="shop">
       <header style={{position: "relative"}}>
@@ -72,7 +79,7 @@ const Shop = (props) => {
           to={{
             pathname: "/cart",
             state: {
-              cart
+              cart,
             }
            }}
         >
