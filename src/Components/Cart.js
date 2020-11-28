@@ -13,6 +13,8 @@ const Cart = (props) => {
           {props.location.state.cart.map((item) => (
             <div>
               <p>{`ID: ${item.id} | Total: ${item.total}`}</p>
+              <p onClick={() => props.location.state.updateCart('d')}>-</p>
+              <p>+</p>
             </div>
           ))}
         </div>
@@ -23,6 +25,11 @@ const Cart = (props) => {
 
 export default Cart;
 
+// fri - make new array and send back to parent
+
 // create temp cart when updating item quantity.
 // send temp cart back up to parent component to update actual cart array
 // will need to send array back
+
+
+// display product with - + buttons to decrease or increase quantity

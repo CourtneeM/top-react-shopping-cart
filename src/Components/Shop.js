@@ -79,7 +79,7 @@ const Shop = (props) => {
           to={{
             pathname: "/cart",
             state: {
-              cart,
+              cart
             }
            }}
         >
