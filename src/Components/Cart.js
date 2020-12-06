@@ -8,15 +8,15 @@ const Cart = (props) => {
         <h1>Nal Hutta Trading Post</h1>
       </heading>
       <main>
-        <button onClick={() => props.history.goBack()}>Back to Shop</button>
+        <button onClick={() => console.log(props)}>Back to Shop</button>
         <div>
-          {props.location.state.cart.map((item) => (
+          {/* props.location.state.cart.map((item) => (
             <div>
               <p>{`ID: ${item.id} | Total: ${item.total}`}</p>
-              <p onClick={() => props.location.state.updateCart('d')}>-</p>
-              <p>+</p>
+              <p>-</p>
+              <p onClick={console.log(props)}>+</p>
             </div>
-          ))}
+          )) */}
         </div>
       </main>
     </div>

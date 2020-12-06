@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Shop = (props) => {
-  const [cartTotal, setCartTotal] = useState(0);
-  
-  const [cart, setCart] = useState([{id: '001', total: 3}, {id: '002', total: 5}]);
-  
   const products = [
     {id: 1, image: '#'}, 
     {id: 2, image: '#'}, 
@@ -15,17 +11,17 @@ const Shop = (props) => {
   ];
 
   // useEffect(() => {
-  //   console.log(cart);
+  //   console.log(props.cart);
   // });
 
   const handleDecrementClick = (id, index) => {
     const decrementCartTotal = () => {
-      if (cartTotal === 0) return;
-      setCartTotal((prevCartTotal) => prevCartTotal - 1);
+      if (props.cartTotal === 0) return;
+      props.updateCartTotal('-');
     }
   
     const removeCartItem = (id, index) => {
-      let updatedCart = [...cart];
+      let updatedCart = [...props.cart];
       updatedCart[index] = {
         id,
         total: updatedCart[index].total - 1
@@ -34,7 +30,7 @@ const Shop = (props) => {
         updatedCart.splice(index, 1);
       }
 
-      setCart(updatedCart);
+      props.updateCart(updatedCart);
     }
 
     decrementCartTotal();
@@ -43,11 +39,11 @@ const Shop = (props) => {
 
   const handleIncrementClick = (id, index) => {
     const incrementCartTotal = () => {
-      setCartTotal((prevCartTotal) => prevCartTotal + 1);
+      props.updateCartTotal('+');
     }
   
     const addCartItem = (id, index) => {
-      let updatedCart = [...cart];
+      let updatedCart = [...props.cart];
       if (updatedCart[index] === undefined) {
         updatedCart[index] = {total: 0}
       }
@@ -56,8 +52,8 @@ const Shop = (props) => {
         total: updatedCart[index].total + 1
       }
   
-      setCart(updatedCart);
-      // console.log(cart)
+      props.updateCart(updatedCart);
+      // console.log(props.cart)
     }
 
     incrementCartTotal();
@@ -65,27 +61,20 @@ const Shop = (props) => {
   }
 
   const updateCart = (newCart) => {
-    setCart(newCart);
+    props.updateCart(newCart);
 
     // will need to update cartTotal - maybe map through cart and add up totals
-    setCartTotal();
+    props.updateCartTotal();
   }
 
   return (
     <div className="shop">
       <header style={{position: "relative"}}>
         <h1>Nal Hutta Trading Post</h1>
-        <Link 
-          to={{
-            pathname: "/cart",
-            state: {
-              cart
-            }
-           }}
-        >
+        <Link to={ {pathname: "/cart"} }>
           <i className="fas fa-shopping-bag fa-2x"></i>
         </Link>
-        <p style={{position: "absolute", bottom: "-25px", left: "30px"}} className="cart-total" >{cartTotal}</p>
+        <p style={{position: "absolute", bottom: "-25px", left: "30px"}} className="cart-total" >{props.cartTotal}</p>
       </header>
       <main>
         <p>Inventory Varies Daily</p>
