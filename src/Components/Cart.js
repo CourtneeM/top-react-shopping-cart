@@ -10,11 +10,11 @@ const Cart = (props) => {
       <main>
         <button onClick={() => console.log(props)}>Back to Shop</button>
         <div>
-          { props.cart.filter((item) => item.total != 0).map((item) => (
+          { props.cart.filter((item) => item.total != 0).map((item, index) => (
             <div>
               <p>{`ID: ${item.id} | Total: ${item.total}`}</p>
-              <p>-</p>
-              <p onClick={console.log(props)}>+</p>
+              <p onClick={() => props.handleDecrementClick(item.id, index)}>-</p>
+              <p onClick={() => props.handleIncrementClick(item.id, index)}>+</p>
             </div>
           ))}
         </div>
@@ -24,12 +24,3 @@ const Cart = (props) => {
 }
 
 export default Cart;
-
-// fri - make new array and send back to parent
-
-// create temp cart when updating item quantity.
-// send temp cart back up to parent component to update actual cart array
-// will need to send array back
-
-
-// display product with - + buttons to decrease or increase quantity
