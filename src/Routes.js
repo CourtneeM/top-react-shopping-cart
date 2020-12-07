@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Home from './Components/Home';
 import Shop from './Components/Shop';
@@ -6,19 +6,59 @@ import Cart from './Components/Cart';
 
 const Routes = () => {
   const [cartTotal, setCartTotal] = useState(0);
-  const [cart, setCart] = useState([{id: '001', total: 3}, {id: '002', total: 5}]);
+  const [cart, setCart] = useState([]);
 
-  const updateCartTotal = (operator) => {
-    if (operator === '+') {
-      setCartTotal((prevCartTotal) => prevCartTotal + 1);
-    } else if (operator === '-') {
+  const handleDecrementClick = (id, index) => {
+    const decrementCartTotal = () => {
+      if (cartTotal === 0) return;
+      if (cart[index].total === 0) return;
+
       setCartTotal((prevCartTotal) => prevCartTotal - 1);
     }
+  
+    const removeCartItem = (id, index) => {
+      let updatedCart = [...cart];
+      updatedCart[index] = {
+        id,
+        total: updatedCart[index].total - 1
+      }
+      if (updatedCart[index].total < 0) {
+        return;
+      }
+
+      setCart(updatedCart);
+    }
+
+    removeCartItem(id, index);
+    decrementCartTotal();
   }
 
-  const updateCart = () => {
+  const handleIncrementClick = (id, index) => {
+    const incrementCartTotal = () => {
+      setCartTotal((prevCartTotal) => prevCartTotal + 1);
+    }
+  
+    const addCartItem = (id, index) => {
+      let updatedCart = [...cart];
+      if (updatedCart[index] === undefined) {
+        updatedCart[index] = {total: 0}
+      }
+      updatedCart[index] = {
+        id,
+        total: updatedCart[index].total + 1
+      }
+  
+      setCart(updatedCart);
+      // console.log(cart)
+    }
 
+    incrementCartTotal();
+    addCartItem(id, index);
   }
+
+  useEffect(() => {
+    console.log(cart);
+  });
 
   return (
     <BrowserRouter>
@@ -28,16 +68,16 @@ const Routes = () => {
           <Shop 
             cartTotal={cartTotal} 
             cart={cart} 
-            updateCartTotal={updateCartTotal} 
-            updateCart={updateCart}
+            handleDecrementClick={handleDecrementClick}
+            handleIncrementClick={handleIncrementClick}
           /> 
         )}/> 
         <Route exact path="/cart" render={() => (
           <Cart 
             cartTotal={cartTotal} 
             cart={cart} 
-            updateCartTotal={updateCartTotal}
-            updateCart={updateCart}
+            handleDecrementClick={handleDecrementClick}
+            handleIncrementClick={handleIncrementClick}
           /> 
         )}/>
       </Switch>

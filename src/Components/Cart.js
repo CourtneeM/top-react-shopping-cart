@@ -10,13 +10,13 @@ const Cart = (props) => {
       <main>
         <button onClick={() => console.log(props)}>Back to Shop</button>
         <div>
-          {/* props.location.state.cart.map((item) => (
+          { props.cart.filter((item) => item.total != 0).map((item) => (
             <div>
               <p>{`ID: ${item.id} | Total: ${item.total}`}</p>
               <p>-</p>
               <p onClick={console.log(props)}>+</p>
             </div>
-          )) */}
+          ))}
         </div>
       </main>
     </div>
