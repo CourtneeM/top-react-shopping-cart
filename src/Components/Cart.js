@@ -8,13 +8,20 @@ const Cart = (props) => {
         <h1>Nal Hutta Trading Post</h1>
       </heading>
       <main>
-        <button onClick={() => console.log(props)}>Back to Shop</button>
+        <Link to={ {pathname: "/shop"} }>
+          <i class="fas fa-store fa-2x"></i>
+        </Link>
         <div>
-          { props.cart.filter((item) => item.total != 0).map((item, index) => (
+          { props.cart.map((item, index) => (
             <div>
-              <p>{`ID: ${item.id} | Total: ${item.total}`}</p>
-              <p onClick={() => props.handleDecrementClick(item.id, index)}>-</p>
-              <p onClick={() => props.handleIncrementClick(item.id, index)}>+</p>
+              { item.total !== 0
+                ? <div>
+                    <p>{`ID: ${item.id} | Total: ${item.total}`}</p>
+                    <p onClick={() => props.handleDecrementClick(item.id, index)}>-</p>
+                    <p onClick={() => props.handleIncrementClick(item.id, index)}>+</p>
+                  </div>
+                : null
+              }
             </div>
           ))}
         </div>

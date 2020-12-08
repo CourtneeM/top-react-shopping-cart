@@ -6,7 +6,13 @@ import Cart from './Components/Cart';
 
 const Routes = () => {
   const [cartTotal, setCartTotal] = useState(0);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([
+                                    {id: '001', total: 0}, 
+                                    {id: '002', total: 0}, 
+                                    {id: '003', total: 0},
+                                    {id: '004', total: 0},
+                                    {id: '005', total: 0} 
+                                  ]);
 
   const handleDecrementClick = (id, index) => {
     const decrementCartTotal = () => {
@@ -40,9 +46,6 @@ const Routes = () => {
   
     const addCartItem = (id, index) => {
       let updatedCart = [...cart];
-      if (updatedCart[index] === undefined) {
-        updatedCart[index] = {total: 0}
-      }
       updatedCart[index] = {
         id,
         total: updatedCart[index].total + 1
