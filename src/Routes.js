@@ -7,11 +7,11 @@ import Cart from './Components/Cart';
 const Routes = () => {
   const [cartTotal, setCartTotal] = useState(0);
   const [cart, setCart] = useState([
-                                    {id: '001', total: 0}, 
-                                    {id: '002', total: 0}, 
-                                    {id: '003', total: 0},
-                                    {id: '004', total: 0},
-                                    {id: '005', total: 0} 
+                                    {id: '001', name: 'laser sword', total: 0}, 
+                                    {id: '002', name: 'blaster', total: 0}, 
+                                    {id: '003', name: 'thermal detonator', total: 0},
+                                    {id: '004', name: 'wookie fur pillow', total: 0},
+                                    {id: '005', name: 'miniature sand crawler', total: 0} 
                                   ]);
 
   const handleDecrementClick = (id, index) => {
