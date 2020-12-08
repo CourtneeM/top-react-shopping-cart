@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import CartHeader from './CartHeader';
 
 const Shop = (props) => {
   const products = [
@@ -14,10 +15,7 @@ const Shop = (props) => {
     <div className="shop">
       <header style={{position: "relative"}}>
         <h1>Nal Hutta Trading Post</h1>
-        <Link to={ {pathname: "/cart"} }>
-          <i className="fas fa-shopping-bag fa-2x"></i>
-        </Link>
-        <p style={{position: "absolute", bottom: "-25px", left: "30px"}} className="cart-total" >{props.cartTotal}</p>
+        <CartHeader cartTotal={props.cartTotal} />
       </header>
       <main>
         <p>Inventory Varies Daily</p>
