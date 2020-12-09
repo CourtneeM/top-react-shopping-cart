@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import CartHeader from './CartHeader';
 
 const Shop = (props) => {
   const products = [
-    {id: '001', name: 'laser sword', image: '/images/lightsaber.png'}, 
-    {id: '002', name: 'blaster', image: '/images/blaster.png'}, 
-    {id: '003', name: 'thermal detonator', image: '/images/thermaldet.png'}, 
-    {id: '004', name: 'wookie fur pillow', image: '/images/wookiepillow.png'}, 
-    {id: '005', name: 'miniature sand crawler', image: '/images/minisand.png'}
+    {id: '001', name: 'Laser Sword', image: '/images/lightsaber.png'}, 
+    {id: '002', name: 'Blaster', image: '/images/blaster.png'}, 
+    {id: '003', name: 'Thermal Detonator', image: '/images/thermaldet.png'}, 
+    {id: '004', name: 'Wookie Fur Pillow', image: '/images/wookiepillow.png'}, 
+    {id: '005', name: 'Miniature Sand Crawler', image: '/images/minisand.png'}
   ];
+
+  const [editMode, setEditMode] = useState(false);
 
   const editItem = () => {
 
@@ -23,18 +25,31 @@ const Shop = (props) => {
     },
     itemCard: {
       width: '200px',
-      height: '200px',
+      height: '300px',
       textAlign: 'center',
-      color: 'red',
+      backgroundColor: '#f2f2f2',
       border: '1px solid #000',
     },
     itemEditBtns: {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
+      flexWrap: 'wrap',
       width: '75px',
-      margin: '0 auto',
+      margin: '15px auto 0',
     },
+    editItemQuantity: {
+      width: '22px',
+      padding: '4px 8px',
+      margin: '0 auto',
+      textAlign: 'center',
+      backgroundColor: '#fff',
+      border: '1px solid #aaa',
+      borderRadius: '10px',
+    },
+    addToCartBtn: {
+      marginTop: '8px',
+    }
   }
 
   return (
@@ -48,13 +63,24 @@ const Shop = (props) => {
         <div className="products" style={styles.itemsContainer}>
           {products.map(({id, name, image}, index) => (
             <div style={styles.itemCard}>
-              {name}
+              <p>{name}</p>
               <img src={image} />
-              <div style={styles.itemEditBtns}>
-                <i onClick={() => props.handleDecrementClick(id, index)} class="fas fa-minus"></i>
-                <p>{props.cart[index].total}</p>
-                <i onClick={() => props.handleIncrementClick(id, index)} class="fas fa-plus"></i>
-              </div>
+              { editMode
+                ? <div style={styles.itemEditBtns}>
+                    <i onClick={() => props.handleDecrementClick(id, index)} class="fas fa-minus"></i>
+                    <input type="text" style={styles.editItemQuantity} value={props.cart[index].total} />
+                    <i onClick={() => props.handleIncrementClick(id, index)} class="fas fa-plus"></i>
+                    <button style={styles.addToCartBtn} onClick={() => setEditMode(false)}>Add to Cart</button>
+                  </div>
+                : <div style={styles.itemEditBtns}>
+                    <input 
+                      type="text" 
+                      style={styles.editItemQuantity} 
+                      value={props.cart[index].total} 
+                      onClick={() => setEditMode(true)}  
+                    />
+                  </div>
+              }
             </div>
           ))}
         </div>
