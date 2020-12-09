@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import CartHeader from './CartHeader';
 
 const Cart = (props) => {
+  const [cartTotal, setCartTotal] = useState(props.cart.reduce((a, item) => a + item.cost, 0));
+
+  const updateCart = () => {
+    let updatedCartTotal = props.cart.reduce((a, item) => a + item.cost, 0)
+    setCartTotal(updatedCartTotal);
+
+    props.updateCart();
+  }
+
   const styles = {
     cartContainer: {
       display: 'flex',
@@ -16,6 +25,7 @@ const Cart = (props) => {
     },
     itemCard: {
       display: 'flex',
+      alignItems: 'center',
       width: '100%',
       textAlign: 'center',
       border: '1px solid #000',
@@ -23,6 +33,10 @@ const Cart = (props) => {
     itemCardInfo: {
       margin: '0 auto',
       fontSize: '1.2rem',
+    },
+    itemImage: {
+      width: '150px',
+      height: '150px',
     },
     itemEditBtns: {
       display: 'flex',
@@ -43,6 +57,7 @@ const Cart = (props) => {
     },
     checkoutBox: {
       flexBasis: '30%',
+      height: '200px',
       textAlign: 'center',
       fontSize: '1.2rem',
       border: '1px solid #000',
@@ -62,11 +77,12 @@ const Cart = (props) => {
   }
 
   return (
+
     <div>
-      <heading>
+      <header>
         <h1>Nal Hutta Trading Post</h1>
         <CartHeader cartQuantity={props.cartQuantity} />
-      </heading>
+      </header>
       <main>
         <div>
           <Link to={ {pathname: "/shop"} }>
@@ -79,13 +95,14 @@ const Cart = (props) => {
               <div style={{width: '70%'}}>
                 { quantity !== 0
                   ? <div style={styles.itemCard}>
-                      <img src={props.products[index].image} alt={props.products[index].name} />
+                      <img style={styles.itemImage} src={props.products[index].image} alt={props.products[index].name} />
                       <div style={styles.itemCardInfo}>
-                        <p>{`${name} x${quantity}`}</p>
+                        <p>{name} x{quantity}</p>
+                        <p>{props.products[index].price} credits each [{props.cart[index].cost} credits] </p>
                         <div style={styles.itemEditBtns}>
-                          <i onClick={() => props.decrementCart(index)} class="fas fa-minus"></i>
-                          <i onClick={() => props.incrementCart(index)} class="fas fa-plus"></i>
-                          <button style={styles.updateBtn} onClick={() => props.updateCart()}>Update</button>
+                          <i onClick={() => props.decrementCart(props.products[index].price, index)} class="fas fa-minus"></i>
+                          <i onClick={() => props.incrementCart(props.products[index].price, index)} class="fas fa-plus"></i>
+                          <button style={styles.updateBtn} onClick={updateCart}>Update</button>
                           <p style={styles.removeFromCart} onClick={() => props.removeFromCart(index)}>Remove from Cart</p>
                         </div>
                       </div>
@@ -96,9 +113,10 @@ const Cart = (props) => {
             ))}
           </div>
           <div style={styles.checkoutBox}>
-            {/* REPLACE PLACEHOLDER TOTAL */}
-            <p>{`Total (${props.cartQuantity} items):`}</p>
-            <p style={styles.cartTotalPrice}>200 credits</p>
+            <p>Total ({props.cartQuantity} items):</p>
+            <p style={styles.cartTotalPrice}>
+              {cartTotal} credits
+            </p>
             <Link to={ {pathname: '/checkout'} }>
                 <button style={styles.checkoutBtn}>Checkout</button>
             </Link>

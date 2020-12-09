@@ -18,7 +18,7 @@ const Shop = (props) => {
     },
     itemCard: {
       width: '200px',
-      height: '300px',
+      height: '350px',
       textAlign: 'center',
       backgroundColor: '#f2f2f2',
       border: '1px solid #000',
@@ -41,7 +41,7 @@ const Shop = (props) => {
       borderRadius: '10px',
     },
     addToCartBtn: {
-      marginTop: '8px',
+      marginTop: '15px',
     }
   }
 
@@ -54,15 +54,16 @@ const Shop = (props) => {
       <main>
         <p>Inventory Varies Daily</p>
         <div className="products" style={styles.itemsContainer}>
-          {props.products.map(({name, image}, index) => (
+          {props.products.map(({name, image, price}, index) => (
             <div style={styles.itemCard}>
               <p>{name}</p>
               <img src={image} />
+              <p>{`${price} credits`}</p>
               { editMode
                 ? <div style={styles.itemEditBtns}>
-                    <i onClick={() => props.decrementCart(index)} class="fas fa-minus"></i>
+                    <i onClick={() => props.decrementCart(price, index)} class="fas fa-minus"></i>
                     <input type="text" style={styles.editItemQuantity} value={props.cart[index].quantity} />
-                    <i onClick={() => props.incrementCart(index)} class="fas fa-plus"></i>
+                    <i onClick={() => props.incrementCart(price, index)} class="fas fa-plus"></i>
                     <button style={styles.addToCartBtn} onClick={updateCart}>Add to Cart</button>
                   </div>
                 : <div style={styles.itemEditBtns}>

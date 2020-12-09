@@ -14,26 +14,28 @@ const Routes = () => {
   ];
   const [cartQuantity, setCartQuantity] = useState(0);
   const [cart, setCart] = useState([
-                                    {id: '001', name: 'Laser Sword', quantity: 0}, 
-                                    {id: '002', name: 'Blaster', quantity: 0}, 
-                                    {id: '003', name: 'Thermal Detonator', quantity: 0},
-                                    {id: '004', name: 'Wookie Fur Pillow', quantity: 0},
-                                    {id: '005', name: 'Miniature Sand Crawler', quantity: 0} 
+                                    {id: '001', name: 'Laser Sword', quantity: 0, cost: 0}, 
+                                    {id: '002', name: 'Blaster', quantity: 0, cost: 0}, 
+                                    {id: '003', name: 'Thermal Detonator', quantity: 0, cost: 0},
+                                    {id: '004', name: 'Wookie Fur Pillow', quantity: 0, cost: 0},
+                                    {id: '005', name: 'Miniature Sand Crawler', quantity: 0, cost: 0} 
                                   ]);
   const [updatedCart, setUpdatedCart] = useState([...cart]);
 
-  const decrementCart = (index) => {
+  const decrementCart = (price, index) => {
     let tempCart = [...updatedCart];
 
     if (updatedCart[index].quantity === 0) return;
     tempCart[index].quantity -= 1;
+    tempCart[index].cost = tempCart[index].quantity * price;
     setUpdatedCart(tempCart);
   }
-
-  const incrementCart = (index) => {
+  
+  const incrementCart = (price, index) => {
     let tempCart = [...updatedCart];
 
     tempCart[index].quantity += 1;
+    tempCart[index].cost = tempCart[index].quantity * price;
     setUpdatedCart(tempCart);
   }
 
@@ -47,6 +49,7 @@ const Routes = () => {
   const removeFromCart = (index) => {
     let tempCart = [...cart];
     tempCart[index].quantity = 0;
+    tempCart[index].cost = 0;
 
     updateCart();
   }
