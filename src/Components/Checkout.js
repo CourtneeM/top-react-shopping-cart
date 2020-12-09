@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import CartHeader from './CartHeader';
+import CheckoutHeader from './CheckoutHeader';
 
 const Checkout = (props) => {
   const [orderSubmitted, setOrderSubmitted] = useState(false);
+  const orderedItems = [...props.cart];
 
   const submitOrder = () => {
     setOrderSubmitted(true)
-    props.resetCart();
   }
 
   const styles={
@@ -32,21 +32,38 @@ const Checkout = (props) => {
       border: 'none',
       borderRadius: '7px',
       cursor: 'pointer',
+    },
+    orderDetails: {
+      margin: '40px 0',
+      padding: '15px 40px',
+      textAlign: 'center',
+      border: '1px solid #000',
+      borderRadius: '8px',
+    },
+    orderContents: {
+      fontWeight: '600',
+      textDecoration: 'underline',
     }
   }
 
   return (
     <div>
       <header>
-        <CartHeader cartQuantity={props.cartQuantity} />
+        <CheckoutHeader />
       </header>
       <main>
         { orderSubmitted
           ? <div style={styles.mainContainer}>
               <p>Order placed</p>
               <p>You will be contacted shortly after payment with additional details for delivery</p>
+              <div style={styles.orderDetails}>
+                <p style={styles.orderContents}>Order Contents</p>
+                { orderedItems.filter((item) => item.quantity !== 0).map((item) => (
+                  <p>{item.name} x{item.quantity}</p>
+                )) }
+              </div>
               <Link to={ {pathname: "/shop"} }>
-                <button>Back to Shop</button>
+                <button onClick={() => props.resetCart()}>Back to Shop</button>
               </Link>
             </div>
           : <div style={styles.mainContainer}>

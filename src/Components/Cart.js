@@ -22,7 +22,6 @@ const Cart = (props) => {
 
     const cartLength = props.cart.filter((item) => item.quantity !== 0);
     if (cartLength.length === 0) setEmptyCart(true);
-    console.log(cartLength.length);
   }
 
   useEffect(() => {
