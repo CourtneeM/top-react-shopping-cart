@@ -5,13 +5,20 @@ import Shop from './Components/Shop';
 import Cart from './Components/Cart';
 
 const Routes = () => {
+  const products = [
+    {id: '001', name: 'Laser Sword', image: '/images/lightsaber.png'}, 
+    {id: '002', name: 'Blaster', image: '/images/blaster.png'}, 
+    {id: '003', name: 'Thermal Detonator', image: '/images/thermaldet.png'}, 
+    {id: '004', name: 'Wookie Fur Pillow', image: '/images/wookiepillow.png'}, 
+    {id: '005', name: 'Miniature Sand Crawler', image: '/images/minisand.png'}
+  ];
   const [cartTotal, setCartTotal] = useState(0);
   const [cart, setCart] = useState([
-                                    {id: '001', name: 'laser sword', total: 0}, 
-                                    {id: '002', name: 'blaster', total: 0}, 
-                                    {id: '003', name: 'thermal detonator', total: 0},
-                                    {id: '004', name: 'wookie fur pillow', total: 0},
-                                    {id: '005', name: 'miniature sand crawler', total: 0} 
+                                    {id: '001', name: 'Laser Sword', total: 0}, 
+                                    {id: '002', name: 'Blaster', total: 0}, 
+                                    {id: '003', name: 'Thermal Detonator', total: 0},
+                                    {id: '004', name: 'Wookie Fur Pillow', total: 0},
+                                    {id: '005', name: 'Miniature Sand Crawler', total: 0} 
                                   ]);
   const [updatedCart, setUpdatedCart] = useState([...cart]);
 
@@ -25,7 +32,7 @@ const Routes = () => {
 
   const incrementCart = (index) => {
     let tempCart = [...updatedCart];
-    
+
     tempCart[index].total += 1;
     setUpdatedCart(tempCart);
   }
@@ -47,6 +54,7 @@ const Routes = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/shop" render={() => (
           <Shop 
+            products={products}
             cartTotal={cartTotal} 
             cart={cart} 
             decrementCart={decrementCart}
@@ -56,8 +64,11 @@ const Routes = () => {
         )}/> 
         <Route exact path="/cart" render={() => (
           <Cart 
+            products={products}
             cartTotal={cartTotal} 
-            cart={cart} 
+            cart={cart}
+            decrementCart={decrementCart}
+            incrementCart={incrementCart}
             addToCart={addToCart}
           /> 
         )}/>

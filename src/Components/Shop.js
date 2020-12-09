@@ -3,14 +3,6 @@ import React, { useState } from 'react';
 import CartHeader from './CartHeader';
 
 const Shop = (props) => {
-  const products = [
-    {id: '001', name: 'Laser Sword', image: '/images/lightsaber.png'}, 
-    {id: '002', name: 'Blaster', image: '/images/blaster.png'}, 
-    {id: '003', name: 'Thermal Detonator', image: '/images/thermaldet.png'}, 
-    {id: '004', name: 'Wookie Fur Pillow', image: '/images/wookiepillow.png'}, 
-    {id: '005', name: 'Miniature Sand Crawler', image: '/images/minisand.png'}
-  ];
-
   const [editMode, setEditMode] = useState(false);
 
   const addToCart = () => {    
@@ -62,7 +54,7 @@ const Shop = (props) => {
       <main>
         <p>Inventory Varies Daily</p>
         <div className="products" style={styles.itemsContainer}>
-          {products.map(({name, image}, index) => (
+          {props.products.map(({name, image}, index) => (
             <div style={styles.itemCard}>
               <p>{name}</p>
               <img src={image} />
