@@ -4,11 +4,11 @@ import CartHeader from './CartHeader';
 
 const Shop = (props) => {
   const products = [
-    {id: '001', name: 'laser sword', image: '#'}, 
-    {id: '002', name: 'blaster', image: '#'}, 
-    {id: '003', name: 'thermal detonator', image: '#'}, 
-    {id: '004', name: 'wookie fur pillow', image: '#'}, 
-    {id: '005', name: 'miniature sand crawler', image: '#'}
+    {id: '001', name: 'laser sword', image: '/images/lightsaber.png'}, 
+    {id: '002', name: 'blaster', image: '/images/blaster.png'}, 
+    {id: '003', name: 'thermal detonator', image: '/images/thermaldet.png'}, 
+    {id: '004', name: 'wookie fur pillow', image: '/images/wookiepillow.png'}, 
+    {id: '005', name: 'miniature sand crawler', image: '/images/minisand.png'}
   ];
 
   const editItem = () => {
@@ -46,9 +46,10 @@ const Shop = (props) => {
       <main>
         <p>Inventory Varies Daily</p>
         <div className="products" style={styles.itemsContainer}>
-          {products.map(({id, name, img}, index) => (
+          {products.map(({id, name, image}, index) => (
             <div style={styles.itemCard}>
               {name}
+              <img src={image} />
               <div style={styles.itemEditBtns}>
                 <i onClick={() => props.handleDecrementClick(id, index)} class="fas fa-minus"></i>
                 <p>{props.cart[index].total}</p>
