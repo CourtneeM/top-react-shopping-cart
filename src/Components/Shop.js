@@ -5,9 +5,9 @@ import CartHeader from './CartHeader';
 const Shop = (props) => {
   const [editMode, setEditMode] = useState(false);
 
-  const addToCart = () => {    
+  const updateCart = () => {    
     setEditMode(false);
-    props.addToCart();
+    props.updateCart();
   }
 
   const styles = {
@@ -63,7 +63,7 @@ const Shop = (props) => {
                     <i onClick={() => props.decrementCart(index)} class="fas fa-minus"></i>
                     <input type="text" style={styles.editItemQuantity} value={props.cart[index].total} />
                     <i onClick={() => props.incrementCart(index)} class="fas fa-plus"></i>
-                    <button style={styles.addToCartBtn} onClick={addToCart}>Add to Cart</button>
+                    <button style={styles.addToCartBtn} onClick={updateCart}>Add to Cart</button>
                   </div>
                 : <div style={styles.itemEditBtns}>
                     <input 

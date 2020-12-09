@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import CartHeader from './CartHeader';
 
 const Cart = (props) => {
-  const updateCart = () => {    
-    props.addToCart();
-  }
-
   const styles = {
     itemsContainer: {
       display: 'flex',
@@ -29,12 +25,19 @@ const Cart = (props) => {
       display: 'flex',
       justifyContent: 'space-around',
       flexWrap: 'wrap',
-      width: '75px',
+      width: '100px',
       margin: '0 auto',
     },
     updateBtn: {
+      width: '80px',
       margin: '12px 0',
-    }
+    },
+    removeFromCart: {
+      fontSize: '0.8rem',
+      textDecoration: 'underline',
+      cursor: 'pointer',
+      color: 'red',
+    },
   }
 
   return (
@@ -60,7 +63,8 @@ const Cart = (props) => {
                       <div style={styles.itemEditBtns}>
                         <i onClick={() => props.decrementCart(index)} class="fas fa-minus"></i>
                         <i onClick={() => props.incrementCart(index)} class="fas fa-plus"></i>
-                        <button style={styles.updateBtn} onClick={updateCart}>Update</button>
+                        <button style={styles.updateBtn} onClick={() => props.updateCart()}>Update</button>
+                        <p style={styles.removeFromCart} onClick={() => props.removeFromCart(index)}>Remove from Cart</p>
                       </div>
                     </div>
                   </div>

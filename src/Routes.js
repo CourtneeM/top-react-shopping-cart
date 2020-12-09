@@ -37,11 +37,18 @@ const Routes = () => {
     setUpdatedCart(tempCart);
   }
 
-  const addToCart = () => {
+  const updateCart = () => {
     const updatedCartTotal = updatedCart.reduce((a, item) => a + item.total, 0);
 
     setCartTotal(updatedCartTotal);
     setCart(updatedCart);
+  }
+
+  const removeFromCart = (index) => {
+    let tempCart = [...cart];
+    tempCart[index].total = 0;
+
+    updateCart();
   }
 
   useEffect(() => {
@@ -59,7 +66,7 @@ const Routes = () => {
             cart={cart} 
             decrementCart={decrementCart}
             incrementCart={incrementCart}
-            addToCart={addToCart}
+            updateCart={updateCart}
           /> 
         )}/> 
         <Route exact path="/cart" render={() => (
@@ -69,7 +76,8 @@ const Routes = () => {
             cart={cart}
             decrementCart={decrementCart}
             incrementCart={incrementCart}
-            addToCart={addToCart}
+            updateCart={updateCart}
+            removeFromCart={removeFromCart}
           /> 
         )}/>
       </Switch>
