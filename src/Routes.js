@@ -14,18 +14,18 @@ const Routes = () => {
                                     {id: '005', name: 'miniature sand crawler', total: 0} 
                                   ]);
 
-  const handleDecrementClick = (id, index) => {
-    const decrementCartTotal = () => {
-      if (cartTotal === 0) return;
-      if (cart[index].total === 0) return;
+  const handleDecrementClick = (updatedCart, index) => {
+    // const decrementCartTotal = () => {
+    //   if (cartTotal === 0) return;
+    //   if (cart[index].total === 0) return;
 
-      setCartTotal((prevCartTotal) => prevCartTotal - 1);
-    }
+    //   setCartTotal((prevCartTotal) => prevCartTotal - 1);
+    //   updatedCart[index].total -= 1;
+    // }
   
-    const removeCartItem = (id, index) => {
+    const removeCartItem = (index) => {
       let updatedCart = [...cart];
       updatedCart[index] = {
-        id,
         total: updatedCart[index].total - 1
       }
       if (updatedCart[index].total < 0) {
@@ -35,28 +35,33 @@ const Routes = () => {
       setCart(updatedCart);
     }
 
-    removeCartItem(id, index);
-    decrementCartTotal();
+    removeCartItem(index);
+    // decrementCartTotal();
   }
 
-  const handleIncrementClick = (id, index) => {
+  const handleIncrementClick = (index) => {
     const incrementCartTotal = () => {
       setCartTotal((prevCartTotal) => prevCartTotal + 1);
     }
   
-    const addCartItem = (id, index) => {
+    const addCartItem = (index) => {
       let updatedCart = [...cart];
       updatedCart[index] = {
-        id,
         total: updatedCart[index].total + 1
       }
   
       setCart(updatedCart);
-      // console.log(cart)
     }
 
     incrementCartTotal();
-    addCartItem(id, index);
+    addCartItem(index);
+  }
+
+  const addToCart = (updatedCart) => {
+    const updatedCartTotal = updatedCart.reduce((a, item) => a + item.total, 0);
+
+    setCartTotal(updatedCartTotal);
+    setCart(updatedCart);
   }
 
   useEffect(() => {
@@ -73,6 +78,7 @@ const Routes = () => {
             cart={cart} 
             handleDecrementClick={handleDecrementClick}
             handleIncrementClick={handleIncrementClick}
+            addToCart={addToCart}
           /> 
         )}/> 
         <Route exact path="/cart" render={() => (

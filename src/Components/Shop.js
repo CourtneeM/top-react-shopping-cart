@@ -12,9 +12,24 @@ const Shop = (props) => {
   ];
 
   const [editMode, setEditMode] = useState(false);
+  const [updatedCart, setUpdatedCart] = useState([...props.cart]);
 
-  const editItem = () => {
+  const decrementCart = (index) => {
+    if (updatedCart[index].total === 0) return;
+    let tempCart = [...updatedCart];
+    tempCart[index].total -= 1;
+    setUpdatedCart(tempCart);
+  }
 
+  const incrementCart = (index) => {
+    let tempCart = [...updatedCart];
+    tempCart[index].total += 1;
+    setUpdatedCart(tempCart);
+  }
+
+  const addToCart = () => {    
+    setEditMode(false);
+    props.addToCart(updatedCart);
   }
 
   const styles = {
@@ -67,10 +82,10 @@ const Shop = (props) => {
               <img src={image} />
               { editMode
                 ? <div style={styles.itemEditBtns}>
-                    <i onClick={() => props.handleDecrementClick(id, index)} class="fas fa-minus"></i>
-                    <input type="text" style={styles.editItemQuantity} value={props.cart[index].total} />
-                    <i onClick={() => props.handleIncrementClick(id, index)} class="fas fa-plus"></i>
-                    <button style={styles.addToCartBtn} onClick={() => setEditMode(false)}>Add to Cart</button>
+                    <i onClick={() => decrementCart(index)} class="fas fa-minus"></i>
+                    <input type="text" style={styles.editItemQuantity} value={updatedCart[index].total} />
+                    <i onClick={() => incrementCart(index)} class="fas fa-plus"></i>
+                    <button style={styles.addToCartBtn} onClick={addToCart}>Add to Cart</button>
                   </div>
                 : <div style={styles.itemEditBtns}>
                     <input 
