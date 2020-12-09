@@ -11,14 +11,22 @@ const Shop = (props) => {
   }
 
   const styles = {
+    currentInvTitle: {
+      fontSize: '1.4rem',
+      fontWeight: '600',
+      fontFamily: 'sans-serif',
+      textAlign: 'center',
+    },
     itemsContainer: {
       display: 'flex',
-      justifyContent: 'space-around',
+      justifyContent: 'center',
       flexWrap: 'wrap',
     },
     itemCard: {
-      width: '200px',
+      minWidth: '200px',
+      width: '20%',
       height: '350px',
+      margin: '0 15px 40px',
       textAlign: 'center',
       backgroundColor: '#f2f2f2',
       border: '1px solid #000',
@@ -51,7 +59,7 @@ const Shop = (props) => {
         <CartHeader cartQuantity={props.cartQuantity} />
       </header>
       <main>
-        <p>Inventory Varies Daily</p>
+        <p style={styles.currentInvTitle}>Current Inventory</p>
         <div className="products" style={styles.itemsContainer}>
           {props.products.map(({name, image, price}, index) => (
             <div style={styles.itemCard}>

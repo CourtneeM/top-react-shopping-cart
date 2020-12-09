@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Home from './Components/Home';
 import Shop from './Components/Shop';
 import Cart from './Components/Cart';
+import Checkout from './Components/Checkout';
 
 const Routes = () => {
   const products = [
@@ -83,6 +84,11 @@ const Routes = () => {
             removeFromCart={removeFromCart}
           /> 
         )}/>
+        <Route exact path="/checkout" render={() => (
+          <Checkout 
+            cartQuantity={cartQuantity}
+          />
+        )} />
       </Switch>
     </BrowserRouter>
   );

@@ -15,11 +15,18 @@ const Cart = (props) => {
 
   const styles = {
     backToShopBtn: {
-      marginLeft: '55px',
+      margin: '20px 0 0 55px',
       fontSize: '0.6rem',
+    },
+    shoppingCartTitle: {
+      fontSize: '1.4rem',
+      fontWeight: '600',
+      fontFamily: 'sans-serif',
+      textAlign: 'center',
     },
     cartContainer: {
       display: 'flex',
+      marginTop: '50px',
     },
     itemsContainer: {
       display: 'flex',
@@ -91,6 +98,7 @@ const Cart = (props) => {
             <i class="fas fa-store fa-2x">Back to Shop</i>
           </Link>
         </div>
+        <p style={styles.shoppingCartTitle}>Shopping Cart</p>
         <div style={styles.cartContainer}>
           <div style={styles.itemsContainer}>
             { props.cart.map(({name, quantity}, index) => (

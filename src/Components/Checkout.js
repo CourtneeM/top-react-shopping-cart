@@ -1,9 +1,16 @@
 import React from 'react';
 
-const Checkout = () => {
+import CartHeader from './CartHeader';
+
+const Checkout = (props) => {
   return (
     <div>
-      
+      <header>
+        <CartHeader cartQuantity={props.cartQuantity} />
+      </header>
+      <main>
+        
+      </main>
     </div>
   );
 }
