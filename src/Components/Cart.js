@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import CartHeader from './CartHeader';
 
 const Cart = (props) => {
   const [cartTotal, setCartTotal] = useState(props.cart.reduce((a, item) => a + item.cost, 0));
+  const [emptyCart, setEmptyCart] = useState(true);
 
   const updateCart = () => {
     let updatedCartTotal = props.cart.reduce((a, item) => a + item.cost, 0)
@@ -18,7 +19,17 @@ const Cart = (props) => {
     
     let updatedCartTotal = props.cart.reduce((a, item) => a + item.cost, 0);
     setCartTotal(updatedCartTotal);
+
+    const cartLength = props.cart.filter((item) => item.quantity !== 0);
+    if (cartLength.length === 0) setEmptyCart(true);
+    console.log(cartLength.length);
   }
+
+  useEffect(() => {
+    props.cart.forEach((item) => {
+      if (item.quantity !== 0) setEmptyCart(false);
+    });
+  });
 
   const styles = {
     backToShopBtn: {
@@ -130,13 +141,23 @@ const Cart = (props) => {
             ))}
           </div>
           <div style={styles.checkoutBox}>
-            <p>Total ({props.cartQuantity} items):</p>
-            <p style={styles.cartTotalPrice}>
-              {cartTotal} credits
-            </p>
-            <Link to={ {pathname: '/checkout'} }>
-                <button style={styles.checkoutBtn}>Checkout</button>
-            </Link>
+            { emptyCart
+              ? <div>
+                  <p>Your cart is currently empty</p>
+                  <Link to={ {pathname: '/shop'} }>
+                    <button>Back to shop</button>
+                  </Link>
+                </div>
+              : <div>
+                  <p>Total ({props.cartQuantity} items):</p>
+                  <p style={styles.cartTotalPrice}>
+                    {cartTotal} credits
+                  </p>
+                  <Link to={ {pathname: '/checkout'} }>
+                    <button style={styles.checkoutBtn}>Checkout</button>
+                  </Link>
+                </div>
+            }
           </div>
         </div>
       </main>
