@@ -53,6 +53,7 @@ const Cart = (props) => {
       backgroundColor: '#333',
       border: 'none',
       borderRadius: '7px',
+      cursor: 'pointer',
     },
     cartTotalPrice: {
       fontSize: '1.4rem',
@@ -64,7 +65,7 @@ const Cart = (props) => {
     <div>
       <heading>
         <h1>Nal Hutta Trading Post</h1>
-        <CartHeader cartTotal={props.cartTotal} />
+        <CartHeader cartQuantity={props.cartQuantity} />
       </heading>
       <main>
         <div>
@@ -74,13 +75,13 @@ const Cart = (props) => {
         </div>
         <div style={styles.cartContainer}>
           <div style={styles.itemsContainer}>
-            { props.cart.map(({name, total}, index) => (
+            { props.cart.map(({name, quantity}, index) => (
               <div style={{width: '70%'}}>
-                { total !== 0
+                { quantity !== 0
                   ? <div style={styles.itemCard}>
                       <img src={props.products[index].image} alt={props.products[index].name} />
                       <div style={styles.itemCardInfo}>
-                        <p>{`${name} x${total}`}</p>
+                        <p>{`${name} x${quantity}`}</p>
                         <div style={styles.itemEditBtns}>
                           <i onClick={() => props.decrementCart(index)} class="fas fa-minus"></i>
                           <i onClick={() => props.incrementCart(index)} class="fas fa-plus"></i>
@@ -96,7 +97,7 @@ const Cart = (props) => {
           </div>
           <div style={styles.checkoutBox}>
             {/* REPLACE PLACEHOLDER TOTAL */}
-            <p>{`Total (${props.cartTotal} items):`}</p>
+            <p>{`Total (${props.cartQuantity} items):`}</p>
             <p style={styles.cartTotalPrice}>200 credits</p>
             <Link to={ {pathname: '/checkout'} }>
                 <button style={styles.checkoutBtn}>Checkout</button>

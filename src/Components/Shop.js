@@ -49,7 +49,7 @@ const Shop = (props) => {
     <div className="shop">
       <header style={{position: "relative"}}>
         <h1>Nal Hutta Trading Post</h1>
-        <CartHeader cartTotal={props.cartTotal} />
+        <CartHeader cartQuantity={props.cartQuantity} />
       </header>
       <main>
         <p>Inventory Varies Daily</p>
@@ -61,7 +61,7 @@ const Shop = (props) => {
               { editMode
                 ? <div style={styles.itemEditBtns}>
                     <i onClick={() => props.decrementCart(index)} class="fas fa-minus"></i>
-                    <input type="text" style={styles.editItemQuantity} value={props.cart[index].total} />
+                    <input type="text" style={styles.editItemQuantity} value={props.cart[index].quantity} />
                     <i onClick={() => props.incrementCart(index)} class="fas fa-plus"></i>
                     <button style={styles.addToCartBtn} onClick={updateCart}>Add to Cart</button>
                   </div>
@@ -69,7 +69,7 @@ const Shop = (props) => {
                     <input 
                       type="text" 
                       style={styles.editItemQuantity} 
-                      value={props.cart[index].total} 
+                      value={props.cart[index].quantity} 
                       onClick={() => setEditMode(true)}  
                     />
                   </div>

@@ -7,7 +7,7 @@ const CartHeader = (props) => {
       <Link to={ {pathname: "/cart"} }>
           <i className="fas fa-shopping-bag fa-2x"></i>
       </Link>
-      <p style={{position: "absolute", bottom: "-25px", left: "30px"}} className="cart-total" >{props.cartTotal}</p>
+      <p style={{position: "absolute", bottom: "-25px", left: "30px"}}>{props.cartQuantity}</p>
     </div>
   );
 }
