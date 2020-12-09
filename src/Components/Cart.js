@@ -13,6 +13,13 @@ const Cart = (props) => {
     props.updateCart();
   }
 
+  const removeFromCart = (index) => {
+    props.removeFromCart(index);
+    
+    let updatedCartTotal = props.cart.reduce((a, item) => a + item.cost, 0);
+    setCartTotal(updatedCartTotal);
+  }
+
   const styles = {
     backToShopBtn: {
       margin: '20px 0 0 55px',
@@ -113,7 +120,7 @@ const Cart = (props) => {
                           <i onClick={() => props.decrementCart(props.products[index].price, index)} class="fas fa-minus"></i>
                           <i onClick={() => props.incrementCart(props.products[index].price, index)} class="fas fa-plus"></i>
                           <button style={styles.updateBtn} onClick={updateCart}>Update</button>
-                          <p style={styles.removeFromCart} onClick={() => props.removeFromCart(index)}>Remove from Cart</p>
+                          <p style={styles.removeFromCart} onClick={() => removeFromCart(index)}>Remove from Cart</p>
                         </div>
                       </div>
                     </div>
