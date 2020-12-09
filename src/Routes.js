@@ -55,6 +55,17 @@ const Routes = () => {
     updateCart();
   }
 
+  const resetCart = () => {
+    const tempCart = [...cart];
+    tempCart.map((item) => {
+      item.quantity = 0;
+      item.cost = 0;
+    });
+
+    setCartQuantity(0);
+    setCart(tempCart);
+  }
+
   useEffect(() => {
     console.log(cart);
   });
@@ -87,6 +98,8 @@ const Routes = () => {
         <Route exact path="/checkout" render={() => (
           <Checkout 
             cartQuantity={cartQuantity}
+            cart={cart}
+            resetCart={resetCart}
           />
         )} />
       </Switch>
