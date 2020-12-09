@@ -14,6 +14,10 @@ const Cart = (props) => {
   }
 
   const styles = {
+    backToShopBtn: {
+      marginLeft: '55px',
+      fontSize: '0.6rem',
+    },
     cartContainer: {
       display: 'flex',
     },
@@ -77,16 +81,14 @@ const Cart = (props) => {
   }
 
   return (
-
     <div>
       <header>
-        <h1>Nal Hutta Trading Post</h1>
         <CartHeader cartQuantity={props.cartQuantity} />
       </header>
       <main>
-        <div>
+        <div style={styles.backToShopBtn}>
           <Link to={ {pathname: "/shop"} }>
-            <i class="fas fa-store fa-2x"></i>
+            <i class="fas fa-store fa-2x">Back to Shop</i>
           </Link>
         </div>
         <div style={styles.cartContainer}>

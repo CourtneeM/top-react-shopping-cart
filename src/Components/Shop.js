@@ -48,7 +48,6 @@ const Shop = (props) => {
   return (
     <div className="shop">
       <header style={{position: "relative"}}>
-        <h1>Nal Hutta Trading Post</h1>
         <CartHeader cartQuantity={props.cartQuantity} />
       </header>
       <main>
