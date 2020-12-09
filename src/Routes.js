@@ -13,51 +13,24 @@ const Routes = () => {
                                     {id: '004', name: 'wookie fur pillow', total: 0},
                                     {id: '005', name: 'miniature sand crawler', total: 0} 
                                   ]);
+  const [updatedCart, setUpdatedCart] = useState([...cart]);
 
-  const handleDecrementClick = (updatedCart, index) => {
-    // const decrementCartTotal = () => {
-    //   if (cartTotal === 0) return;
-    //   if (cart[index].total === 0) return;
+  const decrementCart = (index) => {
+    let tempCart = [...updatedCart];
 
-    //   setCartTotal((prevCartTotal) => prevCartTotal - 1);
-    //   updatedCart[index].total -= 1;
-    // }
-  
-    const removeCartItem = (index) => {
-      let updatedCart = [...cart];
-      updatedCart[index] = {
-        total: updatedCart[index].total - 1
-      }
-      if (updatedCart[index].total < 0) {
-        return;
-      }
-
-      setCart(updatedCart);
-    }
-
-    removeCartItem(index);
-    // decrementCartTotal();
+    if (updatedCart[index].total === 0) return;
+    tempCart[index].total -= 1;
+    setUpdatedCart(tempCart);
   }
 
-  const handleIncrementClick = (index) => {
-    const incrementCartTotal = () => {
-      setCartTotal((prevCartTotal) => prevCartTotal + 1);
-    }
-  
-    const addCartItem = (index) => {
-      let updatedCart = [...cart];
-      updatedCart[index] = {
-        total: updatedCart[index].total + 1
-      }
-  
-      setCart(updatedCart);
-    }
-
-    incrementCartTotal();
-    addCartItem(index);
+  const incrementCart = (index) => {
+    let tempCart = [...updatedCart];
+    
+    tempCart[index].total += 1;
+    setUpdatedCart(tempCart);
   }
 
-  const addToCart = (updatedCart) => {
+  const addToCart = () => {
     const updatedCartTotal = updatedCart.reduce((a, item) => a + item.total, 0);
 
     setCartTotal(updatedCartTotal);
@@ -76,8 +49,8 @@ const Routes = () => {
           <Shop 
             cartTotal={cartTotal} 
             cart={cart} 
-            handleDecrementClick={handleDecrementClick}
-            handleIncrementClick={handleIncrementClick}
+            decrementCart={decrementCart}
+            incrementCart={incrementCart}
             addToCart={addToCart}
           /> 
         )}/> 
@@ -85,8 +58,7 @@ const Routes = () => {
           <Cart 
             cartTotal={cartTotal} 
             cart={cart} 
-            handleDecrementClick={handleDecrementClick}
-            handleIncrementClick={handleIncrementClick}
+            addToCart={addToCart}
           /> 
         )}/>
       </Switch>
@@ -95,5 +67,3 @@ const Routes = () => {
 }
 
 export default Routes;
-
-// look at browser router history api - pushState, replaceState, popState
