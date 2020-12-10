@@ -136,7 +136,7 @@ const Cart = (props) => {
               <div style={{width: '70%'}}>
                 { quantity !== 0
                   ? <div style={styles.itemCard}>
-                      <img style={styles.itemImage} src={props.products[index].image} alt={props.products[index].name} />
+                      <img style={styles.itemImage} src={process.env.PUBLIC_URL + props.products[index].image} alt={props.products[index].name} />
                       <div style={styles.itemCardInfo}>
                         <p>{name} x{quantity}</p>
                         <p>{props.products[index].price} credits each [{props.cart[index].cost} credits] </p>

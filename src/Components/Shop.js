@@ -73,7 +73,7 @@ const Shop = (props) => {
           {props.products.map(({name, image, price}, index) => (
             <div style={styles.itemCard}>
               <p>{name}</p>
-              <img src={image} />
+              <img src={process.env.PUBLIC_URL + image} />
               <p>{`${price} credits`}</p>
               { editMode
                 ? <div style={styles.itemEditBtns}>
