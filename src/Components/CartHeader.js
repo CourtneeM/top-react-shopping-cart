@@ -19,6 +19,11 @@ const CartHeader = (props) => {
     },
     cartContainer: {
       position: 'relative',
+      fontWeight: '600',
+      color: 'yellow',
+    },
+    cartIcon: {
+      color: 'yellow',
     },
     cartTotal: {
       position: 'absolute',
@@ -32,7 +37,7 @@ const CartHeader = (props) => {
       <h1 style={styles.title}>Nal Hutta Trading Post</h1>
       <div style={styles.cartContainer}>
         <Link to={ {pathname: "/cart"} }>
-            <i className="fas fa-shopping-bag fa-2x"></i>
+            <i className="fas fa-shopping-bag fa-2x" style={styles.cartIcon}></i>
         </Link>
         <p style={styles.cartTotal}>{props.cartQuantity}</p>
       </div>
