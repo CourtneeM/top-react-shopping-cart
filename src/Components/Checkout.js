@@ -12,12 +12,17 @@ const Checkout = (props) => {
   }
 
   const styles={
+    checkoutContainer: {
+      minHeight: '100vh',
+      backgroundColor: '#333',
+    },
     mainContainer: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       marginTop: '70px',
       fontSize: '1.2rem',
+      color: '#eee',
     },
     checkoutTotal: {
       marginTop: '50px',
@@ -26,9 +31,9 @@ const Checkout = (props) => {
     },
     submitOrderBtn: {
       padding: '15px 30px',
+      fontSize: '1.1rem',
       fontWeight: '600',
-      color: '#fff',
-      backgroundColor: 'purple',
+      backgroundColor: 'yellow',
       border: 'none',
       borderRadius: '7px',
       cursor: 'pointer',
@@ -47,7 +52,7 @@ const Checkout = (props) => {
   }
 
   return (
-    <div>
+    <div style={styles.checkoutContainer}>
       <header>
         <CheckoutHeader />
       </header>

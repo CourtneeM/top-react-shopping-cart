@@ -5,6 +5,7 @@ const CheckoutHeader = () => {
     title: {
       fontSize: '2rem',
       fontFamily: 'sans-serif',
+      color: '#eee',
     },
     mainContainer: {
       display: 'flex',
