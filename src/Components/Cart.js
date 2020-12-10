@@ -31,9 +31,17 @@ const Cart = (props) => {
   });
 
   const styles = {
+    mainCartContainer: {
+      minHeight: '100vh',
+      color: '#eee',
+      backgroundColor: '#333',
+    },
     backToShopBtn: {
       margin: '20px 0 0 55px',
       fontSize: '0.6rem',
+    },
+    backToShopIcon: {
+      color: '#eee',
     },
     shoppingCartTitle: {
       fontSize: '1.4rem',
@@ -56,7 +64,8 @@ const Cart = (props) => {
       alignItems: 'center',
       width: '100%',
       textAlign: 'center',
-      border: '1px solid #000',
+      border: '5px solid #666',
+      borderRadius: '5px',
     },
     itemCardInfo: {
       margin: '0 auto',
@@ -76,9 +85,13 @@ const Cart = (props) => {
     updateBtn: {
       width: '80px',
       margin: '12px 0',
+      padding: '5px',
+      backgroundColor: '#ccc',
+      border: 'none',
+      borderRadius: '5px',
     },
     removeFromCart: {
-      fontSize: '0.8rem',
+      fontSize: '1rem',
       textDecoration: 'underline',
       cursor: 'pointer',
       color: 'red',
@@ -88,12 +101,13 @@ const Cart = (props) => {
       height: '200px',
       textAlign: 'center',
       fontSize: '1.2rem',
-      border: '1px solid #000',
+      border: '5px solid #666',
+      borderRadius: '5px',
     },
     checkoutBtn: {
       padding: '15px 30px',
-      color: '#fff',
-      backgroundColor: '#333',
+      fontWeight: '600',
+      backgroundColor: 'yellow',
       border: 'none',
       borderRadius: '7px',
       cursor: 'pointer',
@@ -105,14 +119,14 @@ const Cart = (props) => {
   }
 
   return (
-    <div>
+    <div style={styles.mainCartContainer}>
       <header>
         <CartHeader cartQuantity={props.cartQuantity} />
       </header>
       <main>
         <div style={styles.backToShopBtn}>
           <Link to={ {pathname: "/shop"} }>
-            <i class="fas fa-store fa-2x">Back to Shop</i>
+            <i class="fas fa-store fa-2x" style={styles.backToShopIcon}>Back to Shop</i>
           </Link>
         </div>
         <p style={styles.shoppingCartTitle}>Shopping Cart</p>
@@ -130,7 +144,7 @@ const Cart = (props) => {
                           <i onClick={() => props.decrementCart(props.products[index].price, index)} class="fas fa-minus"></i>
                           <i onClick={() => props.incrementCart(props.products[index].price, index)} class="fas fa-plus"></i>
                           <button style={styles.updateBtn} onClick={updateCart}>Update</button>
-                          <p style={styles.removeFromCart} onClick={() => removeFromCart(index)}>Remove from Cart</p>
+                          <p style={styles.removeFromCart} onClick={() => removeFromCart(index)}>Remove</p>
                         </div>
                       </div>
                     </div>
