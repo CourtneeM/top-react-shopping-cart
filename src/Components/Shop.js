@@ -11,10 +11,16 @@ const Shop = (props) => {
   }
 
   const styles = {
+    shopContainer: {
+      width: '100vw',
+      minHeight: '100vh',
+      backgroundColor: '#333',
+    },
     currentInvTitle: {
       fontSize: '1.4rem',
       fontWeight: '600',
       fontFamily: 'sans-serif',
+      color: '#eee',
       textAlign: 'center',
     },
     itemsContainer: {
@@ -29,7 +35,8 @@ const Shop = (props) => {
       margin: '0 15px 40px',
       textAlign: 'center',
       backgroundColor: '#f2f2f2',
-      border: '1px solid #000',
+      border: '5px solid #666',
+      borderRadius: '5px',
     },
     itemEditBtns: {
       display: 'flex',
@@ -50,11 +57,13 @@ const Shop = (props) => {
     },
     addToCartBtn: {
       marginTop: '15px',
+      backgroundColor: '#fff',
+      borderRadius: '5px',
     }
   }
 
   return (
-    <div className="shop">
+    <div className="shop" style={styles.shopContainer}>
       <header style={{position: "relative"}}>
         <CartHeader cartQuantity={props.cartQuantity} />
       </header>
