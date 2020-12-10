@@ -42,12 +42,20 @@ const Checkout = (props) => {
       margin: '40px 0',
       padding: '15px 40px',
       textAlign: 'center',
-      border: '1px solid #000',
-      borderRadius: '8px',
+      border: '5px solid #666',
+      borderRadius: '5px',
     },
     orderContents: {
       fontWeight: '600',
       textDecoration: 'underline',
+    },
+    backToShopBtn: {
+      padding: '15px 30px',
+      fontWeight: '600',
+      backgroundColor: 'yellow',
+      border: 'none',
+      borderRadius: '7px',
+      cursor: 'pointer',
     }
   }
 
@@ -68,7 +76,7 @@ const Checkout = (props) => {
                 )) }
               </div>
               <Link to={ {pathname: "/shop"} }>
-                <button onClick={() => props.resetCart()}>Back to Shop</button>
+                <button style={styles.backToShopBtn} onClick={() => props.resetCart()}>Back to Shop</button>
               </Link>
             </div>
           : <div style={styles.mainContainer}>
