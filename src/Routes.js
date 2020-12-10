@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {HashRouter, Switch, Route} from 'react-router-dom';
 import Home from './Components/Home';
 import Shop from './Components/Shop';
 import Cart from './Components/Cart';
@@ -71,7 +71,7 @@ const Routes = () => {
   });
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/shop" render={() => (
@@ -103,7 +103,7 @@ const Routes = () => {
           />
         )} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
